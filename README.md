@@ -8,4 +8,6 @@ I have been using curses to make some CLIs. I want to make my life easier by cre
 
 ## Road Map
 
-**v0.1.0** Useable Version 4/11/19
+**v0.1.0** Useable Version 4/11/19:
+
+    **Feature**: 
