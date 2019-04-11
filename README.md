@@ -11,7 +11,9 @@ I have been using curses to make some CLIs. I want to make my life easier by cre
 **v0.2.0** Item Type Update 4/20/19 (Projected):
 
 **?**: User will be able to add different type of items?
+
 **?**: Bug fix?
+
 
 
 **v0.1.0** Useable Version 4/11/19:
