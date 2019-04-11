@@ -14,7 +14,7 @@ I have been using curses to make some CLIs. I want to make my life easier by cre
 
 **?**: Bug fix?
 
-
+------------------------------
 
 **v0.1.0** Useable Version 4/11/19:
 
