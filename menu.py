@@ -16,11 +16,13 @@ class Menu:
         self.Items = []
         for i in range(item_num):
             self.Items.append({'item_name':'{}'.format(i), 'mode':'simple', 'function':self._empty, 'start_y':i+1, 'start_x':1, 'break':False})
+        self._return_path = None
 
         # Variable: Flag
-        self._flag_warp = warp
-        self._flag_exit = False
-        self._flag_exec = False
+        self._flag_warp = warp          # flag to indicate if up and down arrow wrap around
+        self._flag_exit = False         # flag to indicate if menu is in exit state
+        self._flag_exec = False         # flag to indicate if a function is needed to be 
+        self._flag_link = False         # flag to indicate if the menu is a linked by a parent menu
 
     def _nevgation (self, key):
         # nevigation check:key up check
@@ -64,11 +66,12 @@ class Menu:
             if self._flag_exit:
                 break
             if self._flag_exec:
-                self.Items[self._position]['function']()
-                self._flag_exec = False
                 if self.Items[self._position]['break']:
                     break
-            
+                else:
+                    self._flag_exec = False
+                    self.Items[self._position]['function']()
+
             # item rendering loop
             for index, item in enumerate(self.Items):
                 if index == self._position:
@@ -81,18 +84,26 @@ class Menu:
             key = self._menu.getch()
             self._nevgation(key)
 
+
+    def _error_headling (self, error_code):
+        if error_code == 101:
+            raise ModeError('ERROR 101: Mode does not exist. Available mode: {}'.format(self._mode_list))
+        elif error_code == 102:
+            raise ModeError('ERROR 102: menu_obj (required by link mode) missing or incorrect')
+
+
     def _empty (self):
         pass
         
-    def add_item (self, num, item_name, mode = 'simple', function = None, start_y = None, start_x = None, breaking = False):
+    def add_item (self, num, item_name, mode = 'simple', function = None, start_y = None, start_x = None, breaking = False, menu_obj = None):
         if mode not in self._mode_list:
-            raise ModeError('Mode does not exist. Available mode: {}'.format(self._mode_list))
+            self._error_headling(101)
 
         # default config:
         if function == None:
             function = self._empty
         if start_y == None:
-            start_y = num
+            start_y = num+1
         if start_x == None:
             start_x = 1
 
@@ -106,11 +117,28 @@ class Menu:
             self.Items[num]['break'] = breaking
 
         elif mode == 'link':
-            
+            if not type(menu_obj) == Menu:
+                self._error_headling(102)
+            self.Items[num]['start_y'] = start_y
+            self.Items[num]['start_x'] = start_x
+            self.Items[num]['break'] = True
+            # assign the function to the object display
+            self.Items[num]['function'] = menu_obj.display
+            menu_obj._flag_link = True
+            menu_obj._return_path = self.display
+
 
     def display (self):
         # wrapper for safe curses operation 
         curses.wrapper(self._loop)
+
+        if self.Items[self._position]['break'] and self._flag_exec:
+            self._flag_exec = False
+            self.Items[self._position]['function']()
+            
+        if not self._return_path == None:
+            self._flag_exit = False
+            self._return_path()
 
     def status (self):
         pass
