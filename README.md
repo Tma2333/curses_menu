@@ -10,9 +10,11 @@ I have been using curses to make some CLIs. I want to make my life easier by cre
 
 **v0.2.0** Item Type Update 4/20/19 (Projected):
 
-**?**: User will be able to add different type of items?
-
-**?**: Bug fix?
+**Feature**: User now can make the item operate in 4 different mode:
+1. *Simple mode*: User can supply the item with a function. When the item is selected in the menu, the supplied function will be executed
+2. *Link mode*: User can supply the item with a menu object. When the item is selected in the menu, it will display the supplied menu. When exit the supplied menu, it will return the previouse menu.
+3. *Edit mode*: User can supply the item with a variable. The variable will display within the menu. When the item is selected, user can edit the supplied variable.
+4. *Exit mode*: When the item is selected, it will exit the current menu.
 
 ------------------------------
 
