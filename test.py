@@ -5,7 +5,7 @@ def fuck ():
     time.sleep(3)
     print(1+1)
 
-x = ['a']
+x = ['1']
 a_menu = menu.Menu(10,10,0,0,True,5,False)
 b_menu = menu.Menu(10,10,0,0,True,4,True)
 c_menu = menu.Menu(15,15,0,0,True,3,False)

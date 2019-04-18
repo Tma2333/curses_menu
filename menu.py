@@ -146,6 +146,8 @@ class Menu:
             raise ModeError('ERROR 102: menu_obj (required by link mode) missing or incorrect')
         elif error_code == 103:
             raise ModeError('ERROR 103: edit_target (required by edit mode) missing')
+        elif error_code == 104:
+            raise ModeError('ERROR 104: edit_target must be a list that containt only one string')
 
 
     def _empty (self):
@@ -198,6 +200,10 @@ class Menu:
         elif mode == 'edit':
             if edit_target == None:
                 self._error_headling(103)
+
+            if not type(edit_target) == type([]) or not len(edit_target) == 1 or not type(edit_target[0]) == type(''):
+                self._error_headling(104)
+
             self.Items[num]['mode'] = 'edit'
             self.Items[num]['start_y'] = start_y
             self.Items[num]['start_x'] = start_x
