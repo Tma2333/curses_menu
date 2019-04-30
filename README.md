@@ -1,10 +1,11 @@
 # curses_menu
 A python module for creating CLI menu/user interface with curses. 
 
-
-## Story
-
 I have been using curses to make some CLIs. I want to make my life easier by creating a menu module that based on curses. 
+
+## Documentation
+
+See [Wiki](https://github.com/Tma2333/curses_menu/wiki/Curses-Menu)
 
 ## Road Map
 
