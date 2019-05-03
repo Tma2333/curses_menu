@@ -9,12 +9,18 @@ See [Wiki](https://github.com/Tma2333/curses_menu/wiki/Curses-Menu)
 
 ## Road Map
 
-*v0.2.1* Item Type Update 4/26/19 (projected):
+*v0.2.1* Item Type Update 5/5/19 (projected):
 ------------------------------
+
+Update Wiki
 
 **Future**: let user to add costumize text verification function for edit mode.
 
 **Future**: add color support?
+
+**Future**: allow use to add text to the menu
+
+**Future**: more costumize options
 
 **?**: bug fix
 
