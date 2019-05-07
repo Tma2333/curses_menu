@@ -8,7 +8,7 @@ I have been using curses to make some CLIs. I want to make my life easier by cre
 
 ## Road Map
 
-*v0.2.1* Item Type Update 5/5/19 (projected):
+*v0.2.1* Item Type Update 5/?/19 (projected):
 ------------------------------
 
 Update Wiki
