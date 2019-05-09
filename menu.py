@@ -223,6 +223,10 @@ class Menu:
             self.Items[num]['function'] = self._empty
 
 
+    def set_color (self, ):
+        pass
+
+
     def display (self):
         # wrapper for safe curses operation 
         curses.wrapper(self._loop)
@@ -234,9 +238,6 @@ class Menu:
         if not self._return_path == None:
             self._flag_exit = False
             self._return_path()
-
-    def status (self):
-        pass
 
 
 class Error (Exception):
