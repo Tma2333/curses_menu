@@ -9,6 +9,8 @@ See [Wiki](https://github.com/Tma2333/curses_menu/wiki/Curses-Menu)
 
 ## Road Map
 
+After v0.2.1 update, the main focus will move towards the snake_dungeon. Update may slow down. 
+
 *v0.2.1* Item Type Update 5/5/19 (projected):
 ------------------------------
 
