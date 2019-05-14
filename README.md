@@ -2,7 +2,7 @@
 A python module for creating CLI menu/user interface with curses. 
 
 
-## Story
+## Story 
 
 I have been using curses to make some CLIs. I want to make my life easier by creating a menu module that based on curses. 
 
