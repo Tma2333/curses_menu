@@ -1,5 +1,9 @@
 import curses
 
+
+# Constant
+
+
 class Menu:
     def __init__ (self, size_y, size_x, start_y, start_x, box = False, item_num = 3, warp = False):
         # Variable: Parameter
@@ -27,12 +31,14 @@ class Menu:
         for i in range(item_num):
             self.Items.append({'item_name':'{}'.format(i), 'mode':'simple', 'function':self._empty, 'start_y':i+1, 'start_x':1, 'break':False})
         self._return_path = None
+        self._text = {}
 
-        # Variable: Flag
+        # Variable: Flag/counter
         self._flag_warp = warp          # flag to indicate if up and down arrow wrap around
         self._flag_exit = False         # flag to indicate if menu is in exit state
         self._flag_exec = False         # flag to indicate if a function is needed to be 
         self._flag_link = False         # flag to indicate if the menu is a linked by a parent menu
+        self._count_text = 0            # counter to track user added text
 
     def _edit (self):
         key = 0
@@ -110,6 +116,11 @@ class Menu:
         self._menu.keypad(True)
         key = 0
 
+        # add text
+        if self._count_text:
+            for i in range(self._count_text):
+                self._menu.addstr(self._text[i][0], self._text[i][1], self._text[i][2], self._text[i][3][0])
+
         # display loop
         while True:
             # state check 
@@ -120,7 +131,7 @@ class Menu:
                     break
                 else:
                     self._flag_exec = False
-                    self.Items[self._position]['function']()
+                    self.Items[self._position]['function'](*arg, **kwarg)
 
             # item rendering loop
             for index, item in enumerate(self.Items):
@@ -223,6 +234,15 @@ class Menu:
             self.Items[num]['function'] = self._empty
 
 
+    def set_color (self, ):
+        pass
+
+    
+    def add_text (self, start_y, start_x, text, *attr):
+        self._text[self._count_text] = [start_y, start_x, text, attr]
+        self._count_text += 1
+
+
     def display (self):
         # wrapper for safe curses operation 
         curses.wrapper(self._loop)
@@ -234,9 +254,6 @@ class Menu:
         if not self._return_path == None:
             self._flag_exit = False
             self._return_path()
-
-    def status (self):
-        pass
 
 
 class Error (Exception):
