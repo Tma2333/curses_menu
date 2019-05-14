@@ -131,7 +131,7 @@ class Menu:
                     break
                 else:
                     self._flag_exec = False
-                    self.Items[self._position]['function']()
+                    self.Items[self._position]['function'](*arg, **kwarg)
 
             # item rendering loop
             for index, item in enumerate(self.Items):
