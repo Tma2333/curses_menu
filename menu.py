@@ -131,7 +131,7 @@ class Menu:
                     break
                 else:
                     self._flag_exec = False
-                    self.Items[self._position]['function'](*arg, **kwarg)
+                    self.Items[self._position]['function']()
 
             # item rendering loop
             for index, item in enumerate(self.Items):
@@ -164,11 +164,7 @@ class Menu:
     def _empty (self):
         pass
         
-    def add_item (self, num, item_name, mode = 'simple', function = None, start_y = None, start_x = None, breaking = False, 
-                                        menu_obj = None, edit_target = None, edit_verify = None, edit_y = None, edit_x = None):
-        if mode not in self._mode_list:
-            self._error_headling(101)
-
+    def add_simple_item (self, num, item_name, function = None, start_y = None, start_x = None, breaking = False, *args, **kwargs):
         # default config:
         if function == None:
             function = self._empty
@@ -176,62 +172,70 @@ class Menu:
             start_y = num+1
         if start_x == None:
             start_x = 1
-        if edit_verify == None:
-            edit_verify = self._edit_verify
+
+        self.Items[num]['item_name'] = item_name
+        self.Items[num]['mode'] = 'simple'
+        self.Items[num]['function'] = function
+        self.Items[num]['start_y'] = start_y
+        self.Items[num]['start_x'] = start_x
+        self.Items[num]['break'] = breaking
+
+    def add_link_item (self, num, item_name, menu_obj, start_y = None, start_x = None):
+        if start_y == None:
+            start_y = num+1
+        if start_x == None:
+            start_x = 1
+
+        if not type(menu_obj) == Menu:
+            self._error_headling(102)
+
+        self.Items[num]['item_name'] = item_name
+        self.Items[num]['mode'] = 'link'
+        self.Items[num]['start_y'] = start_y
+        self.Items[num]['start_x'] = start_x
+        self.Items[num]['break'] = True
+        self.Items[num]['function'] = menu_obj.display
+        menu_obj._flag_link = True
+        menu_obj._return_path = self.display
+        
+    def add_edit_item (self, num, item_name, edit_target, start_y = None, start_x = None, edit_verify = None, edit_y = None, edit_x = None):
+        if start_y == None:
+            start_y = num+1
+        if start_x == None:
+            start_x = 1
         if edit_y == None:
             edit_y = start_y
         if edit_x == None:
             edit_x = start_x + len(item_name) + 1
 
-        # assign items
-        self.Items[num]['item_name'] = item_name
-
-        # simple mode: execute user function
-        if mode == 'simple':
-            self.Items[num]['mode'] = 'simple'
-            self.Items[num]['function'] = function
-            self.Items[num]['start_y'] = start_y
-            self.Items[num]['start_x'] = start_x
-            self.Items[num]['break'] = breaking
-
-        # link mode: link to a sub menu
-        elif mode == 'link':
-            if not type(menu_obj) == Menu:
-                self._error_headling(102)
-            self.Items[num]['mode'] = 'link'
-            self.Items[num]['start_y'] = start_y
-            self.Items[num]['start_x'] = start_x
-            self.Items[num]['break'] = True
-            # assign the function to the object display
-            self.Items[num]['function'] = menu_obj.display
-            menu_obj._flag_link = True
-            menu_obj._return_path = self.display
-        
-        # edit mode: edit a variable
-        elif mode == 'edit':
-            if edit_target == None:
+        if edit_target == None:
                 self._error_headling(103)
+        if not type(edit_target) == type([]) or not len(edit_target) == 1 or not type(edit_target[0]) == type(''):
+            self._error_headling(104)
 
-            if not type(edit_target) == type([]) or not len(edit_target) == 1 or not type(edit_target[0]) == type(''):
-                self._error_headling(104)
+        self.Items[num]['item_name'] = item_name
+        self.Items[num]['mode'] = 'edit'
+        self.Items[num]['start_y'] = start_y
+        self.Items[num]['start_x'] = start_x
+        self.Items[num]['break'] = False
+        self.Items[num]['function'] = self._edit
+        self.Items[num]['edit_target'] = edit_target
+        self.Items[num]['edit_verify'] = edit_verify
+        self.Items[num]['edit_y'] = edit_y
+        self.Items[num]['edit_x'] = edit_x
 
-            self.Items[num]['mode'] = 'edit'
-            self.Items[num]['start_y'] = start_y
-            self.Items[num]['start_x'] = start_x
-            self.Items[num]['break'] = False
-            self.Items[num]['function'] = self._edit
-            self.Items[num]['edit_target'] = edit_target
-            self.Items[num]['edit_verify'] = edit_verify
-            self.Items[num]['edit_y'] = edit_y
-            self.Items[num]['edit_x'] = edit_x
-
-        # exit mode: exit the current menu
-        elif mode == 'exit':
-            self.Items[num]['mode'] = 'exit'
-            self.Items[num]['start_y'] = start_y
-            self.Items[num]['start_x'] = start_x
-            self.Items[num]['break'] = True
-            self.Items[num]['function'] = self._empty
+    def add_exit_item (self, num, item_name, start_y = None, start_x = None):
+        if start_y == None:
+            start_y = num+1
+        if start_x == None:
+            start_x = 1
+        
+        self.Items[num]['item_name'] = item_name
+        self.Items[num]['mode'] = 'exit'
+        self.Items[num]['start_y'] = start_y
+        self.Items[num]['start_x'] = start_x
+        self.Items[num]['break'] = True
+        self.Items[num]['function'] = self._empty
 
 
     def set_color (self, ):
