@@ -260,11 +260,7 @@ class Menu:
             self._return_path()
 
 
-class Error (Exception):
-    pass
-
-
-class ModeError (Error):
+class ModeError (Exception):
     def __init__ (self, message):
         self.message = message
 
