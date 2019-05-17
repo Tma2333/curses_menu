@@ -8,20 +8,30 @@ I have been using curses to make some CLIs. I want to make my life easier by cre
 
 ## Road Map
 
-*v0.2.1* Item Type Update 5/?/19 (projected):
+*v0.3.0* Customization Update 5/?/19 (projected):
 ------------------------------
-
-Update Wiki
 
 **Future**: let user to add costumize text verification function for edit mode.
 
 **Future**: add color support?
 
-**Future**: allow use to add text to the menu
-
 **Future**: more costumize options
 
-**?**: bug fix
+**Future**: allow user to pass function with argument in simple mode
+
+**Future**: overhaul how to handle items.
+
+
+*v0.2.1* (unstable) Update 5/19/19:
+------------------------------
+
+Update Wiki
+
+**Note**: During development, I found many things need to overhaul or redesign. Due to a significant change to the structure of the module, many change will move on to the v0.3.0. This version might be unstable due to this version did not go through any in-depth testing. 
+
+**Feature**: Allow user to add costumize text to the menu
+
+**Feature**: Overhaul `add_item` function. Now, each mode get its own `add_{mode}_item` function. 
 
 *v0.2.0* Item Type Update 4/18/19:
 ------------------------------
