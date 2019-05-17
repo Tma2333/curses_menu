@@ -21,26 +21,26 @@ def example_one ():
     sub_menu = menu.Menu(20, 50, 0, 0, box=False, item_num=3, warp=False)
 
     # when selected, the menu exit and print Good Bye
-    main_menu.add_item(0, 'Print Good Bye!', 'simple', function=goodbye, breaking=True)
+    main_menu.add_simple_item(0, 'Print Good Bye!', function=goodbye, breaking=True)
 
     # when selected, enter sub menu
-    main_menu.add_item(1, 'Sub menu', 'link', menu_obj=sub_menu)
+    main_menu.add_link_item(1, 'Sub menu', menu_obj=sub_menu)
 
     # when selected, edit the string
     a_string = ['Hello!']
-    main_menu.add_item(2, 'String: ', 'edit', edit_target=a_string)
+    main_menu.add_edit_item(2, 'String: ', edit_target=a_string)
 
     # when selected, print the string (Due to currently does not allow function with argument, use a class as work around)
     out = printing(a_string)
-    main_menu.add_item(3, 'Print above', 'simple', function=out.printing, breaking=True)
+    main_menu.add_simple_item(3, 'Print above', function=out.printing, breaking=True)
 
     # when selected, exit the main menu
-    main_menu.add_item(4, 'Exit', 'exit')
+    main_menu.add_exit_item(4, 'Exit')
 
     # place holder 
-    sub_menu.add_item(0, 'Welcome to', 'simple', start_y=10, start_x=12)
-    sub_menu.add_item(1, 'Nothing', 'simple', start_y=12, start_x=10)
-    sub_menu.add_item(2, 'Return', 'exit', start_y=14, start_x=14)
+    sub_menu.add_simple_item(0, 'Welcome to', start_y=10, start_x=12)
+    sub_menu.add_simple_item(1, 'Nothing', start_y=12, start_x=10)
+    sub_menu.add_exit_item(2, 'Return', start_y=14, start_x=14)
 
     main_menu.display()
 
