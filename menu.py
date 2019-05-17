@@ -180,6 +180,17 @@ class Menu:
         self.Items[num]['start_x'] = start_x
         self.Items[num]['break'] = breaking
 
+        #==================
+        #Need to Change
+        #==================
+        if args != ():
+            self.Items[num]['args'] = args
+        
+        if kwargs != {}:
+            self.Items[num]['kwargs'] = kwargs
+
+        
+
     def add_link_item (self, num, item_name, menu_obj, start_y = None, start_x = None):
         if start_y == None:
             start_y = num+1
@@ -197,6 +208,7 @@ class Menu:
         self.Items[num]['function'] = menu_obj.display
         menu_obj._flag_link = True
         menu_obj._return_path = self.display
+
         
     def add_edit_item (self, num, item_name, edit_target, start_y = None, start_x = None, edit_verify = None, edit_y = None, edit_x = None):
         if start_y == None:
