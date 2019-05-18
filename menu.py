@@ -272,6 +272,21 @@ class Menu:
             self._return_path()
 
 
+
+class Items:
+    def __init__(self, num):
+        pass
+
+    def __setitem__(self, key, value):
+        pass
+
+    def __getitem__(self, key):
+        pass
+
+
+
+
+
 class ModeError (Exception):
     def __init__ (self, message):
         self.message = message
