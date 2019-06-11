@@ -273,15 +273,24 @@ class Menu:
 
 
 
+class _Item:
+    def __init__(self):
+        pass
+
+
 class Items:
     def __init__(self, num):
-        pass
+        self.num = num
+
+    def __len__ (self):
+        return self.num
 
     def __setitem__(self, key, value):
         pass
 
     def __getitem__(self, key):
         pass
+
 
 
 
