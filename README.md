@@ -8,7 +8,7 @@ I have been using curses to make some CLIs. I want to make my life easier by cre
 
 ## Road Map
 
-*v0.3.0* Customization Update 5/?/19 (projected):
+*v0.3.0* Customization Update ?/?/20 (projected):
 ------------------------------
 
 **Future**: let user to add costumize text verification function for edit mode.
